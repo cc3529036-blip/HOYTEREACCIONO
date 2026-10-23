@@ -21,8 +21,7 @@ nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 nav a{padding:7px 14px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);font-size:14px;font-weight:600;transition:background .15s,border-color .15s}
 nav a:hover{border-color:var(--accent);background:#2a2540}
 nav a.patreon:hover{border-color:#ff424d}
-main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:12px;padding:12px;min-height:0}
-main.nochat{grid-template-columns:minmax(0,1fr)}
+main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:12px;padding:12px;min-height:0}
 .stage{display:flex;flex-direction:column;gap:10px;min-width:0}
 .player{position:relative;background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9;width:100%;max-height:calc(100vh - 170px);border:1px solid var(--line)}
 .player #tw,.player iframe,.player video{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -54,7 +53,8 @@ main.nochat{grid-template-columns:minmax(0,1fr)}
 .soc.patreon{background:#ff424d;color:#fff;background:linear-gradient(135deg,#f96854,#ff424d)}
 .soc.discord{background:#5865f2;color:#fff}
 .qnote{font-size:12px;color:var(--mute)}
-aside{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:480px;height:calc(100vh - 80px);position:sticky;top:12px}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0;align-self:start;position:sticky;top:12px}
+aside{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:360px;height:calc(100vh - 336px)}
 main.nochat aside{display:none}
 .chead{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--panel2)}
 .chead strong{flex:1;font-size:14px;display:flex;align-items:center;gap:8px}
@@ -83,34 +83,33 @@ main.nochat aside{display:none}
 .cfoot button{background:none;border:0;color:var(--accent2);font-size:12px;font-weight:600;text-decoration:underline;padding:0}
 .cfoot button.kbtn{background:#53fc18;color:#0b0e0a;text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px}
 .cfoot button.kbtn:hover{filter:brightness(1.1)}
+.cfoot button.pbtn{background:var(--accent);color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px}
+.cfoot button.pbtn:hover{background:#7d33f0}
 .cfoot button[hidden],.cfoot[hidden]{display:none}
 .kwrite{position:absolute;left:0;right:0;bottom:0;height:128px;z-index:3;background:var(--panel2);border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px 14px;text-align:center;font-size:13px;line-height:1.4;color:var(--mute)}
 .kwrite b{color:var(--text)}
 .kwrite>div{width:100%}
 .kwrite #kOut{display:flex;flex-direction:column;align-items:center;gap:8px}
-.kwrite .khead{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:6px;color:var(--text)}
-.kwrite .klink{background:none;border:0;color:var(--accent2);font-size:12px;font-weight:600;text-decoration:underline;padding:0}
-.kwrite .krow{display:flex;gap:8px}
-.kwrite input{flex:1;min-width:0;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 10px;font:inherit;font-size:14px}
-.kwrite input:focus{outline:none;border-color:#53fc18}
-.kwrite .kstat{min-height:16px;font-size:12px;margin-top:6px;text-align:left}
-.kwrite .kstat.err{color:var(--bad)}.kwrite .kstat.ok{color:var(--ok)}
 .kwrite [hidden]{display:none!important}
 .kwrite .kbtn{background:#53fc18;color:#0b0e0a;border:0;font-size:14px;font-weight:700;padding:9px 18px;border-radius:8px}
 .kwrite .kbtn:hover{filter:brightness(1.1)}
-.kwrite .kemo{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:0 11px;font-size:18px;line-height:1}
-.kwrite .kemo:hover{border-color:#53fc18}
-#kEmotes{position:absolute;left:8px;right:8px;bottom:136px;max-height:210px;overflow:auto;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:4px;z-index:4;box-shadow:0 6px 24px rgba(0,0,0,.5)}
-#kEmotes[hidden]{display:none}
-#kEmotes button{background:none;border:0;padding:4px;border-radius:6px;display:grid;place-items:center}
-#kEmotes button:hover{background:var(--panel)}
-#kEmotes img{width:32px;height:32px;object-fit:contain}
-.showchat{display:none}
-main.nochat .showchat{display:inline-flex}
+.chatToggle{position:absolute;top:10px;right:10px;z-index:5;width:34px;height:34px;border-radius:8px;border:0;background:rgba(0,0,0,.45);color:#fff;display:grid;place-items:center;opacity:.75;transition:opacity .15s,background .15s}
+.chatToggle:hover{opacity:1;background:rgba(0,0,0,.7)}
+.chatToggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chatToggle .a-show{display:none}
+main.nochat .chatToggle .a-hide{display:none}
+main.nochat .chatToggle .a-show{display:block}
+.twitchbox{position:relative;width:100%;height:300px;flex:none;background:#000;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.twitchbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 footer{padding:12px 20px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;text-align:center}
+@media(min-width:961px){
+.twitchbox{height:clamp(160px,26vh,300px)}
+aside{height:calc(100vh - 36px - clamp(160px,26vh,300px))}
+}
 @media(max-width:960px){
 main{grid-template-columns:1fr}
-aside{position:static;height:560px;min-height:0}
+.side{position:static}
+aside{height:560px;min-height:0}
 .player{max-height:none}
 nav{margin-left:0;width:100%}
 }
@@ -126,16 +125,20 @@ nav{margin-left:0;width:100%}
 
 <main id="main">
   <section class="stage">
-    <div class="player" id="player"><iframe id="okplayer" title="Stream en directo" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="player" id="player"><iframe id="okplayer" title="Stream en directo" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <button class="chatToggle" id="chatToggle" type="button" title="Ocultar chat" aria-label="Ocultar chat" aria-expanded="true">
+        <svg class="a-hide" viewBox="0 0 24 24"><path d="M3 12h13"/><path d="M12 7l5 5-5 5"/><path d="M21 5v14"/></svg>
+        <svg class="a-show" viewBox="0 0 24 24"><path d="M21 12H8"/><path d="M12 7l-5 5 5 5"/><path d="M3 5v14"/></svg>
+      </button>
+    </div>
+    <div class="bar"><span class="qnote">¿No ves o no oyes la reacción? Toca el video o recarga el reproductor.</span><button class="btn" id="btnReload" type="button">Recargar reproductor</button></div>
     <div class="profile">
       <img class="avatar" id="avatar" alt="Foto de perfil de HoyTeReacciono" src="https://static-cdn.jtvnw.net/jtv_user_pictures/9cbb64ee-d1f1-456a-8075-99cd4abe4db1-profile_image-300x300.png" onerror="this.onerror=null;this.removeAttribute('src')">
-      <div class="pinfo"><h1>HoyTeReacciono <a class="subbtn" id="lnkSub" href="https://www.twitch.tv/hoytereacciono" target="_blank" rel="noopener">Suscribirse</a></h1><p id="followers"></p></div>
-      <div class="bar">
-        <button class="btn showchat" id="showChat" type="button">Mostrar chat</button>
-      </div>
+      <div class="pinfo"><h1>HoyTeReacciono <a class="subbtn" id="lnkSub" href="https://www.twitch.tv/hoytereacciono" target="_blank" rel="noopener">Suscribirse</a>
+        </h1><p id="followers"></p></div>
     </div>
     <div class="socials" aria-label="Redes">
-      <a class="soc twitch" href="https://www.twitch.tv/fernandororonoa" target="_blank" rel="noopener" id="lnkTwitch">Twitch</a>
+      <a class="soc twitch" href="https://www.twitch.tv/hoytereacciono" target="_blank" rel="noopener" id="lnkTwitch">Twitch</a>
       <a class="soc kick" href="https://kick.com/hoytereacciono1" target="_blank" rel="noopener" id="lnkKick">Kick</a>
       <a class="soc tiktok" href="#" target="_blank" rel="noopener" id="lnkTiktok">TikTok</a>
       <a class="soc patreon" href="#" target="_blank" rel="noopener" id="lnkPatreon">Patreon</a>
@@ -143,6 +146,8 @@ nav{margin-left:0;width:100%}
     </div>
   </section>
 
+  <div class="side">
+    <div class="twitchbox"><iframe id="twPlayer" title="Twitch" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen scrolling="no"></iframe></div>
   <aside id="chatPanel" aria-label="Chat del stream">
     <div class="chead">
       <strong><span id="cState">Chat</span></strong>
@@ -163,21 +168,17 @@ nav{margin-left:0;width:100%}
         <div class="cover"><div class="spinner"></div><div class="cmsg">Conectando con el chat…</div><button class="btn primary cretry" type="button" hidden>Reintentar</button></div>
         <iframe title="Chat de Kick" allow="clipboard-write"></iframe>
         <div class="kwrite">
-          <div id="kLogged" hidden>
-            <div class="khead"><span id="kUser">Chateando en Kick</span><button type="button" class="klink" id="kLogout">Salir</button></div>
-            <div class="krow"><button type="button" class="kemo" id="kEmoBtn" title="Emotes" aria-label="Emotes">😀</button><input id="kMsg" type="text" maxlength="500" placeholder="Enviar un mensaje" autocomplete="off" aria-label="Mensaje para el chat de Kick"><button type="button" class="kbtn" id="kSend">Chatear</button></div>
-          </div>
           <div id="kOut"><span id="kOutText"></span><button type="button" class="kbtn" id="btnWrite2">Escribir en Kick</button></div>
-          <div class="kstat" id="kStat" aria-live="polite"></div>
         </div>
-        <div id="kEmotes" hidden></div>
       </div>
     </div>
     <div class="cfoot" id="cfoot">
       <span>¿No puedes escribir?</span>
+      <button type="button" class="pbtn" id="btnTwPop">Abrir chat en ventana</button>
       <button type="button" id="btnLogin">Iniciar sesión</button>
     </div>
   </aside>
+  </div>
 </main>
 
 <footer>© HoyTeReacciono</footer>
@@ -186,160 +187,14 @@ nav{margin-left:0;width:100%}
 /* ===== CONFIGURACIÓN ===== */
 const CHANNEL = "hoytereacciono";      // Twitch
 const KICK_CHANNEL = "hoytereacciono1"; // Kick
-/* Emotes de Kick para el selector 😀: ["nombre", id]. El id es el número de la imagen del emote.
-   Cómo sacarlo: en el chat de Kick, clic derecho sobre el emote → "Copiar dirección de la imagen".
-   La dirección es https://files.kick.com/emotes/NUMERO/fullsize → ese NUMERO es el id. */
-const KICK_EMOTES = [
-  ["ThisIsFine", 37236],
-  ["peepoShy", 39275],
-  ["WeirdChamp", 37240],
-  ["emojiBlowKiss", 1579036],
-  ["jessybabybaile", 4418407],
-  ["emojiWink", 1730831],
-  ["SenpaiWhoo", 5756676],
-  ["catKISS", 4147900],
-  ["NODDERS", 5756504],
-  ["KEKW", 37226],
-  ["WeirdChamp", 5756678],
-  ["Prayge", 37234],
-  ["duckPls", 4147914],
-  ["LULW", 37227],
-  ["collectiblespeepoClown", 5747909],
-  ["collectiblesuwu", 5747912],
-  ["collectiblesangy", 5747932],
-  ["collectiblesYikes", 5747942],
-  ["collectibleso7", 5747977],
-  ["collectiblesmeandyou", 5747985],
-  ["asmonSmash", 3753119],
-  ["AURAPULSE", 5380971],
-  ["AYAYA", 5756662],
-  ["BANG", 5882722],
-  ["BBoomer", 4147910],
-  ["beeBobble", 39251],
-  ["Bwop", 37217],
-  ["CaptFail", 5756614],
-  ["catblobDance", 4148144],
-  ["Clap", 37218],
-  ["DanceDance", 5756616],
-  ["DonoWall", 5756666],
-  ["EDDIE", 3645850],
-  ["EDMusiC", 39265],
-  ["EZ", 5756668],
-  ["FLASHBANG", 5756511],
-  ["Flowie", 39402],
-  ["gachiGASM", 37243],
-  ["GIGACHAD", 5756671],
-  ["GnomeDisco", 4055795],
-  ["HaHaa", 4148076],
-  ["highCortisol", 5273247],
-  ["HYPERCLAP", 4148074],
-  ["JudgeJackson", 5452913],
-  ["KEKBye", 4147902],
-  ["KEKLEO", 37225],
-  ["kickclassic", 5470844],
-  ["kickDrops", 5339426],
-  ["kkHuh", 5756621],
-  ["lowCortisol", 5273243],
-  ["mericCat", 4148128],
-  ["modCheck", 5756381],
-  ["MOGGED", 5273241],
-  ["MuteD", 5756628],
-  ["NugTime", 5756602],
-  ["ODAJAM", 4055796],
-  ["OOOO", 37229],
-  ["OuttaPocket", 5756623],
-  ["PatrickBoo", 4147892],
-  ["PeepoClap", 37232],
-  ["peepoDJ", 37245],
-  ["peepoRiot", 5756675],
-  ["PogU", 37233],
-  ["POLICE", 37230],
-  ["politeCat", 5756627],
-  ["ppJedi", 4147888],
-  ["ratJAM", 5756644],
-  ["Sadge", 4148081],
-  ["shoulderRoll", 5380973],
-  ["SIT", 5755651],
-  ["SUSSY", 5756632],
-  ["TriKool", 5756677],
-  ["TRUEING", 3645849],
-  ["vibePls", 4147884],
-  ["WeSmart", 5756680],
-  ["emojiAngel", 1730752],
-  ["emojiAngry", 1730753],
-  ["emojiAstonished", 1579033],
-  ["emojiAwake", 1730754],
-  ["emojiBubbly", 1730755],
-  ["emojiCheerful", 1730756],
-  ["emojiClown", 1730758],
-  ["emojiCool", 1730759],
-  ["emojiCrave", 1730760],
-  ["emojiCry", 1730761],
-  ["emojiCrying", 1579040],
-  ["emojiCurious", 1730762],
-  ["emojiCute", 1730765],
-  ["emojiDead", 1730767],
-  ["emojiDevil", 1730768],
-  ["emojiDisappoint", 1579041],
-  ["emojiDisguise", 1579042],
-  ["emojiDJ", 1730769],
-  ["emojiDown", 1730770],
-  ["emojiEnraged", 1579044],
-  ["emojiExcited", 1579045],
-  ["emojiEyeRoll", 1579054],
-  ["emojiFire", 1730772],
-  ["emojiGamer", 1730774],
-  ["emojiGlass", 1730775],
-  ["emojiGoofy", 1730776],
-  ["emojiGramps", 1730782],
-  ["emojiGrimacing", 1579046],
-  ["emojiGrin", 1730785],
-  ["emojiGrumpy", 1730786],
-  ["emojiHappy", 1730787],
-  ["emojiHeartEyes", 1579047],
-  ["emojiHmm", 1730788],
-  ["emojiHydrate", 4200908],
-  ["emojiKing", 1730789],
-  ["emojiKiss", 1730790],
-  ["emojiLady", 1730791],
-  ["emojiLaughing", 1579050],
-  ["emojiLoading", 1730792],
-  ["emojiLol", 1730794],
-  ["emojiMan", 1730796],
-  ["emojiMoneyEyes", 1579051],
-  ["emojiNo", 1730798],
-  ["emojiOof", 1730799],
-  ["emojiOooh", 1730800],
-  ["emojiOuch", 1730802],
-  ["emojiPleading", 1579052],
-  ["emojiRich", 1730803],
-  ["emojiShocked", 1730807],
-  ["emojiSleep", 1730825],
-  ["emojiSmart", 1730827],
-  ["emojiSmerking", 1579055],
-  ["emojiSmiling", 1579057],
-  ["emojiSorry", 1730829],
-  ["emojiStare", 1730830],
-  ["emojiStarEyes", 1579058],
-  ["emojiSwearing", 1579059],
-  ["emojiUnamused", 1579061],
-  ["emojiVomiting", 1579062],
-  ["emojiXEyes", 1579038],
-  ["emojiYay", 1730834],
-  ["emojiYes", 1730835],
-  ["emojiYuh", 1730839],
-  ["emojiYum", 1730840]
-  /* añade aquí los de tu canal, por ejemplo: ["MiEmote", 1234567], */
-];
-const KICK_API = "https://kick-chat.bazingatbbt2.workers.dev";  // URL de tu Worker para escribir en Kick desde la página, ej. "https://kick-chat.tuusuario.workers.dev" (ver LEEME-Kick-Chat.md). Vacío = se usa la ventana de Kick.
 const FOLLOWERS = "Directos en Twitch y Kick";   // texto bajo el nombre (ej. "1.2K seguidores")
 const AVATAR_URL = "";               // opcional: otra foto (por defecto usa la de Twitch)
 const LINKS = {
-  tiktok:  "https://www.tiktok.com/@hoytereacciono",
+  tiktok:  "https://www.tiktok.com/@hoytereacciono_oficial",
   patreon: "https://www.patreon.com/cw/hoytereaccionoEsp/home",
   discord: "https://discord.com/invite/EcDz5z68H9"
 };
-const STREAM_URL = "https://vdo.ninja/?view=rvdavvdzj"; // reproductor de VDO.Ninja.
+const STREAM_URL = "https://meshcast.io/view.html?geo=cn1&id=FernandoRoronoa"; // reproductor de Meshcast (servidor intermedio de VDO.Ninja).
 /* ========================= */
 
 const $ = id => document.getElementById(id);
@@ -347,7 +202,7 @@ const PARENT = location.hostname || "localhost";
 
 $("followers").textContent = FOLLOWERS;
 $("followers").hidden = !FOLLOWERS;
-$("lnkSub").href = "https://www.twitch.tv/hoytereacciono";
+$("lnkSub").href = "https://www.twitch.tv/" + CHANNEL;
 if (AVATAR_URL) $("avatar").src = AVATAR_URL;
 $("lnkTwitch").href = "https://www.twitch.tv/" + CHANNEL;
 $("lnkKick").href = "https://kick.com/" + KICK_CHANNEL;
@@ -355,9 +210,18 @@ $("lnkTiktok").href = LINKS.tiktok;
 $("lnkPatreon").href = LINKS.patreon;
 $("lnkDiscord").href = LINKS.discord;
 
-/* ---------- Reproductor (ok.ru) ---------- */
-$("okplayer").src = STREAM_URL;
+/* ---------- Reproductor (Meshcast) ---------- */
+function loadStream(){
+  const f = $("okplayer");
+  f.src = "about:blank";
+  setTimeout(() => { f.src = STREAM_URL; }, 100);
+}
+loadStream();
+$("btnReload").addEventListener("click", loadStream);
 (function(){ const t = $("liveTag"); t.textContent = "Baja latencia"; t.classList.remove("on"); })();
+
+/* ---------- Reproductor de Twitch (visible, suma espectadores) ---------- */
+$("twPlayer").src = "https://player.twitch.tv/?channel=" + encodeURIComponent(CHANNEL) + "&parent=" + encodeURIComponent(PARENT) + "&autoplay=true&muted=true";
 
 /* ---------- Chat (Twitch + Kick) ---------- */
 const PLATFORMS = {
@@ -451,101 +315,13 @@ $("btnLogin").addEventListener("click", () => {
   const iv = setInterval(() => { if (popup.closed) { clearInterval(iv); loadChat(k, true); } }, 600);
 });
 
-/* ---------- Escribir en Kick desde la página (API oficial de Kick + Worker) ---------- */
-const kOut = $("kOut"), kLogged = $("kLogged"), kMsg = $("kMsg"), kStat = $("kStat");
-function kAuthGet(){ try { return JSON.parse(localStorage.getItem("kick_auth") || "null"); } catch(e){ return null; } }
-function kAuthSet(a){ try { a ? localStorage.setItem("kick_auth", JSON.stringify(a)) : localStorage.removeItem("kick_auth"); } catch(e){} }
-function kStatus(msg, kind){ kStat.textContent = msg || ""; kStat.className = "kstat" + (kind ? " " + kind : ""); }
-function kRender(){
-  const on = !!KICK_API, a = on && kAuthGet();
-  kLogged.hidden = !a; kOut.hidden = !!a;
-  $("btnWrite2").textContent = on ? "Iniciar sesión con Kick" : "Escribir en Kick";
-  $("kOutText").textContent = on ? "Inicia sesión con tu cuenta de Kick para escribir en el chat desde aquí."
-                                 : "Para escribir en Kick inicia sesión en su ventana de chat. Aquí abajo solo se puede leer.";
-}
-/* Al volver del login de Kick, el Worker devuelve la sesión en el # de la URL */
-(function(){
-  const m = location.hash.match(/kick_auth=([^&]+)/);
-  if (!m) return;
-  try {
-    const t = JSON.parse(atob(m[1].replace(/-/g, "+").replace(/_/g, "/")));
-    if (t.access_token) kAuthSet({ access_token: t.access_token, refresh_token: t.refresh_token, expires_at: Date.now() + (t.expires_in || 3600) * 1000 });
-  } catch(e){}
-  history.replaceState(null, "", location.pathname + location.search);
-})();
-async function kRefresh(){
-  const a = kAuthGet();
-  if (!a || !a.refresh_token) return false;
-  try {
-    const r = await fetch(KICK_API + "/refresh", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ refresh_token: a.refresh_token }) });
-    if (!r.ok) throw new Error("refresh");
-    const t = await r.json();
-    kAuthSet({ access_token: t.access_token, refresh_token: t.refresh_token || a.refresh_token, expires_at: Date.now() + (t.expires_in || 3600) * 1000 });
-    return true;
-  } catch(e){ kAuthSet(null); return false; }
-}
-async function kSend(){
-  const text = kMsg.value.trim();
-  if (!text) return;
-  const a = kAuthGet();
-  if (!a) { kRender(); return; }
-  if (a.expires_at - Date.now() < 60000 && !(await kRefresh())) { kRender(); kStatus("Tu sesión caducó. Inicia sesión de nuevo.", "err"); return; }
-  $("kSend").disabled = true; kStatus("Enviando…");
-  const post = () => fetch(KICK_API + "/send", { method:"POST", headers:{ "Content-Type":"application/json", "Authorization":"Bearer " + kAuthGet().access_token }, body: JSON.stringify({ content: text }) });
-  try {
-    let r = await post();
-    if (r.status === 401 && await kRefresh()) r = await post();
-    if (r.ok) { kMsg.value = ""; kStatus("Enviado", "ok"); setTimeout(() => kStatus(""), 2000); }
-    else if (r.status === 401) { kAuthSet(null); kRender(); kStatus("Tu sesión caducó. Inicia sesión de nuevo.", "err"); }
-    else kStatus("Kick no aceptó el mensaje (código " + r.status + "). Puede que el chat tenga restricciones.", "err");
-  } catch(e){ kStatus("No hay conexión con el servidor del chat.", "err"); }
-  $("kSend").disabled = false; kMsg.focus();
-}
-async function kWho(){
-  const a = kAuthGet();
-  if (!a || !KICK_API) return;
-  try {
-    const r = await fetch(KICK_API + "/me", { headers:{ "Authorization":"Bearer " + a.access_token } });
-    if (r.ok) { const d = await r.json(); if (d.name) $("kUser").textContent = "Chateando como " + d.name; }
-  } catch(e){}
-}
-$("btnWrite2").addEventListener("click", () => {
-  if (KICK_API) location.href = KICK_API + "/login?return=" + encodeURIComponent(location.origin + location.pathname);
-  else writeKick();
-});
-$("kSend").addEventListener("click", kSend);
-kMsg.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); kSend(); } });
-$("kLogout").addEventListener("click", () => { kAuthSet(null); kStatus(""); kRender(); });
-kRender(); kWho();
+/* ---------- Escribir en Kick: abre la ventana del chat de Kick ---------- */
+$("kOutText").textContent = "Para escribir en Kick inicia sesión en su ventana de chat. Aquí abajo solo se puede leer.";
+$("btnWrite2").addEventListener("click", writeKick);
 
-/* ---------- Selector de emotes de Kick ---------- */
-(function(){
-  const box = $("kEmotes"), btn = $("kEmoBtn");
-  KICK_EMOTES.filter(Array.isArray).forEach(([name, id]) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.title = name;
-    const img = document.createElement("img");
-    img.src = "https://files.kick.com/emotes/" + id + "/fullsize"; img.alt = name; img.loading = "lazy";
-    b.appendChild(img);
-    b.addEventListener("click", () => {
-      const tag = "[emote:" + id + ":" + name + "]";
-      const i = kMsg.selectionStart ?? kMsg.value.length, j = kMsg.selectionEnd ?? i;
-      const add = tag + " ";
-      if (kMsg.value.length + add.length > kMsg.maxLength) return;
-      kMsg.value = kMsg.value.slice(0, i) + add + kMsg.value.slice(j);
-      kMsg.focus(); kMsg.setSelectionRange(i + add.length, i + add.length);
-    });
-    box.appendChild(b);
-  });
-  btn.addEventListener("click", e => { e.stopPropagation(); box.hidden = !box.hidden; });
-  document.addEventListener("click", e => { if (!box.contains(e.target)) box.hidden = true; });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") box.hidden = true; });
-  $("kLogout").addEventListener("click", () => { box.hidden = true; });
-  if (!KICK_EMOTES.length) btn.hidden = true;
-})();
-$("btnPop").addEventListener("click", () => {
-  if (active === "kick") writeKick(); else window.open(PLATFORMS[active].pop, "chat_"+active, "width=420,height=700");
-});
+function writeTwitch(){ openWin(PLATFORMS.twitch.pop, "chat_twitch", 420, 700); }
+$("btnTwPop").addEventListener("click", writeTwitch);
+$("btnPop").addEventListener("click", () => { if (active === "kick") writeKick(); else writeTwitch(); });
 
 /* Mostrar / ocultar chat */
 function setChat(show){
@@ -554,20 +330,30 @@ function setChat(show){
   if (show && !PLATFORMS[active].loaded) loadChat(active, true);
 }
 $("btnHide").addEventListener("click", () => setChat(false));
-$("showChat").addEventListener("click", () => setChat(true));
+$("chatToggle").addEventListener("click", () => setChat($("main").classList.contains("nochat")));
+function syncToggle(){
+  const hidden = $("main").classList.contains("nochat"), b = $("chatToggle");
+  b.title = b.ariaLabel = hidden ? "Mostrar chat" : "Ocultar chat";
+  b.setAttribute("aria-expanded", !hidden);
+}
+new MutationObserver(syncToggle).observe($("main"), { attributes:true, attributeFilter:["class"] });
 
 /* Recuperación automática */
-window.addEventListener("online", () => Object.keys(PLATFORMS).forEach(k => PLATFORMS[k].started && loadChat(k, true)));
+window.addEventListener("online", () => { loadStream(); Object.keys(PLATFORMS).forEach(k => PLATFORMS[k].started && loadChat(k, true)); });
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) hiddenAt = Date.now();
-  else if (hiddenAt && Date.now() - hiddenAt > 5*60*1000 && !$("main").classList.contains("nochat")) loadChat(active, true);
+  else if (hiddenAt) {
+    const away = Date.now() - hiddenAt;
+    if (away > 60*1000) loadStream();   // la conexión de video suele caerse si la pestaña estuvo en segundo plano
+    if (away > 5*60*1000 && !$("main").classList.contains("nochat")) loadChat(active, true);
+  }
 });
 
 let startHidden = false;
 try { startHidden = localStorage.getItem("chat") === "0"; } catch(e){}
 if (startHidden) $("main").classList.add("nochat");
 else { loadChat("twitch", true); loadChat("kick", true); }
-updateFoot();
+updateFoot(); syncToggle();
 </script>
 </body>
 </html>
